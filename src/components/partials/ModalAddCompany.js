@@ -70,6 +70,7 @@ const Modal = ({ isOpen, onClose }) => {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <input
+              placeholder="nom de l'entreprise"
               type="text"
               name="name"
               value={companyForm.name}
@@ -78,6 +79,7 @@ const Modal = ({ isOpen, onClose }) => {
           </div>
           <div className="mb-4">
             <input
+              placeholder="ville"
               type="text"
               name="city"
               value={companyForm.address.city}
@@ -86,6 +88,7 @@ const Modal = ({ isOpen, onClose }) => {
           </div>
           <div className="mb-4">
             <input
+              placeholder="code postal"
               type="number"
               name="zipCode"
               value={companyForm.address.zipCode}
@@ -94,6 +97,7 @@ const Modal = ({ isOpen, onClose }) => {
           </div>
           <div className="mb-4">
             <input
+              placeholder="rue"
               type="text"
               name="street"
               value={companyForm.address.street}
@@ -101,13 +105,12 @@ const Modal = ({ isOpen, onClose }) => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="select">Select:</label>
+            <label htmlFor="select">Type de l'entreprise:</label>
             <select
               name="companyType"
               value={companyForm.companyType}
               onChange={handleChange}
             >
-              <option value="">Sélectionnez une option</option>
               <option value="ASCENSORISTE">Ascensoriste</option>
               <option value="ADMIN">Admin</option>
               <option value="MAITRE-OUVRAGE">Maitre d'ouvrage</option>

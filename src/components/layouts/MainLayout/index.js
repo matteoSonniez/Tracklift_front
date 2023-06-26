@@ -14,14 +14,16 @@ const MainLayout = ({ children }) => {
   console.log(user.isAdmin);
 
   return (
-    <div>
+    <div className="flex" style={{ backgroundColor: "#E6E7E9" }}>
       {user.isAdmin ? 
         <NavAdmin/>
       :
         <NavUser/>
       }
-      <div>
-        {children}
+      <div className="flex-1 h-screen overflow-y-auto p-5 ">
+        <div className="bg-white h-full rounded-md shadow-xl">
+          {children}
+        </div>
       </div>
     </div>
   );

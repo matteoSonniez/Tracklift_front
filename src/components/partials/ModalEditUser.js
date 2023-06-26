@@ -2,21 +2,16 @@ import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import useFetch from "@/hooks/useFetch";
 
-const Modal = ({ isOpen, onClose }) => {
+const Modal = ({ isOpen, onClose, user }) => {
 
     const [token, setToken] = useState(Cookies.get('token_cookie'));
 
-    const [userForm, setUserForm] = useState({
-        password: "",
-        email: "",
-        firstName: "",
-        lastName: "",
-        phone: "",
-        companyId: ""
-      });
+    const [userForm, setUserForm] = useState(null);
+    const [id, setId] = useState(null);
 
-    const { fetchData, data, error, loading } = useFetch({ url: "auth/register", method: "POST", body: userForm, token: token })
+    const { fetchData, data, error, loading } = useFetch({ url: `user/update-one/${id}`, method: "PUT", body: userForm, token: token })
     const { data: company, error: companyError, loading: companyLoading, fetchData: fetchDataCompany } = useFetch({ url: "company/get-all", method: "GET", body: null, token: token });
+    const { data: deleteUser, error: deleteUserError, loading: deleteUserLoading, fetchData: fetchDataDeleteUser } = useFetch({ url: `user/delete-one/${id}`, method: "DELETE", body: null, token: token });
 
     const handleChange = (e) => {
         setUserForm({
@@ -34,9 +29,15 @@ const Modal = ({ isOpen, onClose }) => {
 
     useEffect(() => {
         if(company != undefined) {
-            console.log(company, "all company");
+            setUserForm(user);
         }
     }, [company]);
+
+    useEffect(() => {
+        if(userForm != null) {
+            setId(userForm._id)
+        }
+    }, [userForm]);
 
     useEffect(() => {
 
@@ -67,9 +68,9 @@ const Modal = ({ isOpen, onClose }) => {
     <div className="fixed inset-0 flex items-center justify-center z-50">
       <div className="absolute inset-0 bg-black opacity-50"></div>
       <div className="bg-white p-6 rounded-lg z-10 modal-content">
-        <h2 className="text-lg font-bold mb-4">Ajouter un utilisateur</h2>
-        {/* Contenu de la modal */}
-        <form onSubmit={handleSubmit}>
+        <h2 className="text-lg font-bold mb-4">Modifier un utilisateur</h2>
+        {userForm != null &&
+            <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <input
               placeholder="prénom"
@@ -119,10 +120,13 @@ const Modal = ({ isOpen, onClose }) => {
             <div className="mb-4">
                 <label htmlFor="select">Sélectionnez une entreprise : </label>
                 <select
-                name="companyId"
-                value={userForm.companyId}
+                name="company"
+                value={userForm.company}
                 onChange={handleChange}
                 >
+                {userForm.company != undefined &&
+                    <option value={userForm.company._id}>{userForm.company.name}</option>
+                }
                 {company.companys.map((company) => (
                     <option value={company._id}>{company.name}</option>                    
                 ))}
@@ -131,6 +135,7 @@ const Modal = ({ isOpen, onClose }) => {
            }
           <button type="submit">Soumettre</button>
         </form>
+        } 
         <button onClick={onClose}>Fermer</button>
       </div>
     </div>
