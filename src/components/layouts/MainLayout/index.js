@@ -15,13 +15,11 @@ const MainLayout = ({ children }) => {
 
   return (
     <div className="flex" style={{ backgroundColor: "#E6E7E9" }}>
-      {user.isAdmin ? 
+      {user.isAdmin != undefined &&
         <NavAdmin/>
-      :
-        <NavUser/>
       }
-      <div className="flex-1 h-screen overflow-y-auto p-5 ">
-        <div className="bg-white h-full rounded-md shadow-xl">
+      <div className="flex-1 h-screen  p-5 ">
+        <div className="bg-white h-full w-full rounded-md shadow-xl overflow-y-scroll scrollbar-thin">
           {children}
         </div>
       </div>

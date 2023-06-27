@@ -33,7 +33,7 @@ const NavBarAdmin = () => {
             <div className="space-y-5 p-8 flex flex-col text-[21px] font-normal">
                 <text>Chantiers</text>
                 <a className="cursor-pointer" onClick={()=> (router.push('/users'))}>Ascenseurs</a>
-                <a className="cursor-pointer">Déchets</a>
+                <a className={`cursor-pointer ease-in duration-100 ${router.asPath.includes("/wastes") ? "text-theblue text-[22px]" : "text-black"}`} onClick={()=> (router.push('/wastes'))}>Déchets</a>
                 <a className={`cursor-pointer ease-in duration-100 ${router.asPath.includes("/company") ? "text-theblue text-[22px]" : "text-black"}`} onClick={()=> (router.push('/company'))}>Entreprises</a>
                 <a className={`cursor-pointer ease-in duration-100 ${router.asPath.includes("/users") ? "text-theblue text-[22px]" : "text-black"}`} onClick={()=> (router.push('/users'))}>Utilisateurs</a>
             </div>
