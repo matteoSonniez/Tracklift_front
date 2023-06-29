@@ -10,7 +10,7 @@ import Edit from '@/img/modif.svg';
 import Voir from '@/img/voir.svg';
 import Delete from '@/img/delete.svg';
 
-const Index = () => {
+const Index = ({ handleNavAdminValue }) => {
 
     const router = useRouter();
 
@@ -93,43 +93,76 @@ const Index = () => {
 
     return (
         <div>
-            <div className="w-full border-b-2 py-3 px-5 flex text-[20px] sticky top-0 z-50 bg-white">
-                <text className="font-light">Tracklift {'>'}</text>
-                <text className="font-normal ml-1">Utilisateurs</text>
-            </div>
-            <div className="m-5 flex">
-                <button className="bg-theblue text-white py-2 px-4 font-semibold rounded-l-lg">
-                    Rechercher un utilisateur
-                </button>
-                <input
-                        className="border rounded-r-md w-3/5 border-theblue"
+            <div className="bg-white shadow-md">
+                  <input
+                        className=" w-2/5 outline-none focus:outline-none px-8 py-4"
+                        placeholder="Recherche..."
                         type="text"
                         name="test"
                         required={true}
                 />
-                <div className="ml-auto mr-5">
-                    <button onClick={openModal} className="bg-theblue text-white py-2 px-4 font-semibold rounded-md">
-                        Ajouter un utilisateur
-                    </button>
                 </div>
+            <div className="w-full py-3 px-8 flex text-[20px]">
+                <button onClick={()=>handleNavAdminValue()}>test</button>
+                <text className="font-light">Tracklift {'>'}</text>
+                <text className="font-normal ml-1">Utilisateurs</text>
             </div>
-            <div class="relative overflow-x-auto">
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-base text-gray-500 uppercase bg-thegris2">
+                <button onClick={openModal} className="bg-theblue hidden md:block ml-auto text-white py-1.5 px-4 font-semibold rounded-md whitespace-nowrap">
+                    Ajouter un utilisateur
+                </button>
+                
+                <button onClick={openModal} className="bg-theblue ml-auto md:hidden text-white py-1.5 px-4 font-semibold rounded-md">
+                      Ajouter
+                </button>
+            <div className="w-full p-5">
+            <div class="overflow-x-auto w-full bg-white rounded-lg">
+                <div>
+                {allUser != undefined &&
+                    <>
+                    {allUser.map((user) => (
+                      <div className="border border-gray-200">
+                        <div className="flex justify-between p-3">
+                            <text>Nom</text>
+                            <text>{user.firstName}</text>
+                        </div>
+                        <div className="flex justify-between p-3">
+                            <text>Rôle</text>
+                            <text>{user.firstName}</text>
+                        </div>
+                        <div className="flex justify-between p-3">
+                            <text>Email</text>
+                            <text>{user.email}</text>
+                        </div>
+                        <div className="flex justify-between p-3">
+                            <text>Entreprise</text>
+                            <text>{user.firstName}</text>
+                        </div>
+                        <div className="flex justify-between p-3">
+                            <text>Actions</text>
+                            <text>{user.firstName}</text>
+                        </div>
+                        
+                      </div>
+                    ))}
+                  </>
+                    }
+                </div>
+                <table class="hidden md:table w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                    <thead class="text-base text-gray-500 uppercase bg-thegris2 ">
                         <tr>
-                            <th scope="col" class="px-6 py-5">
+                            <th scope="col" class="px-2 py-5">
                                 Nom
                             </th>
-                            <th scope="col" class="px-6 py-5">
+                            <th scope="col" class="px-2 py-5">
                                 Rôle
                             </th>
-                            <th scope="col" class="px-6 py-5">
+                            <th scope="col" class="px-2 py-5">
                                 Email
                             </th>
-                            <th scope="col" class="px-6 py-5">
+                            <th scope="col" class="px-2 py-5">
                                 Entreprise
                             </th>
-                            <th scope="col" class="px-6 py-5">
+                            <th scope="col" class="px-2 py-5">
                                 Actions
                             </th>
                         </tr>
@@ -138,22 +171,22 @@ const Index = () => {
                     <tbody>
                     {allUser.slice(startIndex, endIndex).map((user) => (
                       <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={user.id}>
-                        <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <th scope="row" className="px-2 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {user.firstName} {user.lastName}
                         </th>
                         {user.isAdmin ?
-                            <td className="px-6 py-4">
+                            <td className="px-2 py-4">
                                 Admin
                             </td>
                         :
-                            <td className="px-6 py-4">
+                            <td className="px-2 py-4">
                                 Utilisateur
                             </td>
                         }
-                        <td className="px-6 py-4">
+                        <td className="px-2 py-4 whitespace-wrap">
                             {user.email}
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-2 py-4">
                             {user.company.name}
                         </td>
                         <td className="px-2 py-4 flex">
@@ -185,6 +218,7 @@ const Index = () => {
                 }
                 <Modal isOpen={isModalOpen} onClose={closeModal} />
                 <ModalEdit isOpen={isModalEditOpen} onClose={closeModalEdit} user={userToModif} />
+            </div>
             </div>
             {user.isAdmin === false &&
             <div>

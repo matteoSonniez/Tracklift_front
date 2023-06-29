@@ -139,9 +139,9 @@ const Index = () => {
                             {user.company.name}
                         </td>
                         <td className="px-2 py-4 flex justify-end mr-10">
-                          <img onClick={() => deleteOneUser(user._id)} className="w-12 cursor-pointer" src={Delete.src} alt="Delete" />
                           <img onClick={() => openModalEdit(user)} className="w-12 cursor-pointer" src={Edit.src} alt="Edit" />
                           <img onClick={() => (router.push(`/users/${user._id}`))} className="w-12 cursor-pointer" src={Voir.src} alt="View" />
+                          <img onClick={() => deleteOneUser(user._id)} className="w-12 cursor-pointer" src={Delete.src} alt="Delete" />
                         </td>
                       </tr>
                     ))}

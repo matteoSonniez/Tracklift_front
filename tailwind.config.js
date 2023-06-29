@@ -16,6 +16,7 @@ module.exports = {
         theblue: '#0B8A95', // Exemple de couleur personnalisée nommée "primary"
         thegris: '#BCBDC1',
         thegris2: '#EEEEEF',
+        thegris3:'#F4F5F6',
         thered: '#F28071'
       },
     },
