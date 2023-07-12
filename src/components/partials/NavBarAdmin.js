@@ -5,7 +5,11 @@ import Track from '@/img/menu_track.jpg';
 import TrackBase from '@/img/TrackLogoBase2.png';
 import TrackText from '@/img/TrackLogoText2.png';
 import Deco from '@/img/deco.png';
-import Worksite from '@/img/outil.png';
+import Worksite from '@/img/chantier.png';
+import Company from '@/img/company.png';
+import Users from '@/img/groupe.png';
+import Elevator from '@/img/elevator.png';
+import Waste from '@/img/waste.png';
 import UserContext from "@/context/UserContext";
 import { BsArrowLeftShort } from 'react-icons/bs'; 
 import { RiToolsFill } from 'react-icons/ri';
@@ -22,40 +26,54 @@ const NavBarAdmin = ({isOpen, onValueChange}) => {
 
     useEffect(() => {
         setOpen(isOpen)
-        console.log(isOpen, "bonnnnnnnnnn")
     }, [isOpen]);
 
 
     return (
         <div className={`bg-theblue text-black sm:relative sm:z-50 absolute ${!open && "relative"} sm:block
-            shadow-lg h-screen ${open ? "w-56":"sm:w-20 hidden"} duration-300 pt-4 p-4 min-w-56`}>
+            shadow-lg h-screen ${open ? "w-56":"justify-center items-center sm: hidden"} duration-300 pt-4 min-w-56 border-r-1 border-slate-600`}>
             <BsArrowLeftShort className={`bg-white text-theblue text-3xl rounded-full absolute -right-3 top-[68px]
              border border-theblue cursor-pointer ${!open && "hidden"} sm:hidden`} onClick={()=> ( onValueChange())}/>
-            <div className="flex">
+            <div className="flex px-7 py-5">
                 <img className={`w-12 ${open && "rotate-[360deg]"} duration-300`} src={TrackBase.src}/>
-                <img className={`w-24 origin-left duration-300 ${!open && "scale-0"} self-start ml-4`} src={TrackText.src}/>
+                <img className={`w-[90px] origin-left duration-300 ${!open && "hidden"} self-start ml-4`} src={TrackText.src}/>
             </div>
             {user != undefined &&
-            <div className="border-b-2 border-t-2 mt-4 flex py-2">
+            <div className="border-b-2 border-t-2 mt-4 flex py-2 px-4 justify-center">
                 <div className="rounded-full bg-white text-lg font-semibold p-3 text-theblue h-11 w-11 flex justify-center items-center">
                     <text className="uppercase">{user.firstName[0]}{user.lastName[0]}</text>
                 </div>
-                <div className={`text-white flex flex-col ml-2 leading-tight justify-center ${!open && "scale-0"} origin-left duration-300`} >
-                    <text>{user.firstName} <span className="uppercase">{user.lastName}</span></text>
+                <div className={`text-white flex flex-col ml-2 leading-tight justify-center ${!open && "hidden"} origin-left duration-300 `} >
+                    <text className="flex">{user.firstName}&nbsp;<span className="uppercase">{user.lastName}</span></text>
                     {user.isAdmin ?
-                        <text>(admin)</text>
+                        <text className="text-sm">(admin)</text>
                     :
-                        <text>(user)</text>
+                        <text className="text-xs">(user)</text>
                     }
                 </div>
             </div>
             }
-            <div className="space-y-5 flex flex-col text-[21px] font-normal text-white mt-5">
-                <div className="flex"><text className={`${!open && "scale-0"} origin-left duration-300 ease-in `}>Chantiers</text></div>
-                <div className="flex"><a className={`${!open && "scale-0"} origin-left duration-300 cursor-pointer ease-in `} onClick={()=> (router.push('/wastes'))}>Ascenseurs</a></div>
-                <div className="flex"><a className={`${!open && "scale-0"} origin-left duration-300 cursor-pointer ease-in  `} onClick={()=> (router.push('/wastes'))}>Déchets</a></div>
-                <div className="flex"><a className={`${!open && "scale-0"} origin-left duration-300 cursor-pointer ease-in  `} onClick={()=> (router.push('/company'))}>Entreprises</a></div>
-                <div className="flex"><a className={`${!open && "scale-0"} origin-left duration-300 cursor-pointer ease-in  `} onClick={()=> (router.push('/users'))}>Utilisateurs</a></div>
+            <div className={`space-y-10 flex flex-col text-[21px] font-normal  text-white mt-10 px-9 ${!open && "items-center"}`}>
+                <div className="flex items-center space-x-4 h-10 cursor-pointer" onClick={()=> (router.push('/wastes'))}>
+                    <img className={`w-5 h-5 ${!open && "hover:w-6 hover:h-6"}`} src={Worksite.src}/>
+                    <text className={`${!open && "hidden"} origin-left duration-300 ease-in `}>Chantiers</text>
+                </div>
+                <div className="flex items-center space-x-4 h-10 cursor-pointer" onClick={()=> (router.push('/wastes'))}>
+                    <img className={`w-5 h-5 ${!open && "hover:w-6 hover:h-6"}`} src={Elevator.src}/>
+                    <a className={`${!open && "hidden"} origin-left duration-300 cursor-pointer ease-in`}>Ascenseurs</a>
+                </div>
+                <div className="flex items-center space-x-4 h-10 cursor-pointer" onClick={()=> (router.push('/wastes'))}>
+                    <img className={`w-5 h-5 ${!open && "hover:w-6 hover:h-6"}`} src={Waste.src}/>
+                    <a className={`${!open && "hidden"} origin-left duration-300 cursor-pointer ease-in `}>Déchets</a>
+                </div>
+                <div className="flex items-center space-x-4 h-10 cursor-pointer"  onClick={()=> (router.push('/company'))}>
+                    <img className={`w-5 h-5 ${!open && "hover:w-6 hover:h-6"}`} src={Company.src}/>
+                    <a className={`${!open && "hidden"} origin-left duration-300 cursor-pointer ease-in `}>Entreprises</a>
+                </div>
+                <div className="flex items-center space-x-4 h-10 cursor-pointer" onClick={()=> (router.push('/users'))}>
+                    <img className={`w-5 h-5 ${!open && "hover:w-6 hover:h-6"}`} src={Elevator.src}/>
+                    <a className={`${!open && "hidden"} origin-left duration-300 cursor-pointer ease-in `}>Utilisateurs</a>
+                </div>
             </div>
             <div className="bottom-0 absolute py-8 w-full flex flex-col  space-y-2 text-thegris font-normal text-[18px]">
                 <button

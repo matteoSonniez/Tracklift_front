@@ -14,7 +14,7 @@ const MainLayout = ({ children }) => {
     setOpen(!open);
   };
 
-  const childrenWithProps = cloneElement(children, { handleNavAdminValue });
+  const childrenWithProps = cloneElement(children, { handleNavAdminValue , open});
 
   return (
     <div className="flex bg-thegris3">
